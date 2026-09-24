@@ -113,16 +113,16 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 ### Tests for User Story 3
 
-- [ ] T035 [P] [US3] 编写 IP、CIDR、IP 闭区间、端口、ASN、时间、哈希和证书序列号的边界与性质测试于 `tests/unit/test_value_validation.py`
-- [ ] T036 [P] [US3] 编写矛盾、不可观察能力、主观条件和跨搜索引擎语义缺失的拒绝测试于 `tests/integration/test_safe_rejection.py`
+- [X] T035 [P] [US3] 编写 IP、CIDR、IP 闭区间、端口、ASN、时间、哈希和证书序列号的边界与性质测试于 `tests/unit/test_value_validation.py`
+- [X] T036 [P] [US3] 编写矛盾、不可观察能力、主观条件和跨搜索引擎语义缺失的拒绝测试于 `tests/integration/test_safe_rejection.py`
 
 ### Implementation for User Story 3
 
-- [ ] T037 [P] [US3] 实现 IP/CIDR/范围、端口、ASN、时间、哈希和证书值验证器于 `src/fofa_compiler/domain/value_validation.py`
-- [ ] T038 [P] [US3] 实现互斥谓词、恒假组合和逻辑矛盾检测于 `src/fofa_compiler/domain/contradictions.py`
-- [ ] T039 [US3] 实现字段、运算符、括号、引号、转义、类型及语义完整性查询校验器于 `src/fofa_compiler/domain/query_validator.py`
-- [ ] T040 [US3] 实现不可表达能力分类与固定拒绝决策，并将原因只写入审计记录于 `src/fofa_compiler/application/reject_unsupported.py`
-- [ ] T041 [US3] 将校验失败和必要语义无法保留的结果接入逐题生成编排于 `src/fofa_compiler/application/generate_answers.py`
+- [X] T037 [P] [US3] 实现 IP/CIDR/范围、端口、ASN、时间、哈希和证书值验证器于 `src/fofa_compiler/domain/value_validation.py`
+- [X] T038 [P] [US3] 实现互斥谓词、恒假组合和逻辑矛盾检测于 `src/fofa_compiler/domain/contradictions.py`
+- [X] T039 [US3] 实现字段、运算符、括号、引号、转义、类型及语义完整性查询校验器于 `src/fofa_compiler/domain/query_validator.py`
+- [X] T040 [US3] 实现不可表达能力分类与固定拒绝决策，并将原因只写入审计记录于 `src/fofa_compiler/application/reject_unsupported.py`
+- [X] T041 [US3] 将校验失败和必要语义无法保留的结果接入逐题生成编排于 `src/fofa_compiler/application/generate_answers.py`
 
 **Checkpoint**: 已知不可转换基准的拒绝准确率为 100%，提交值与固定文本逐字符一致。
 

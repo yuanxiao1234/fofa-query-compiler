@@ -5,9 +5,19 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 
+from fofa_compiler.application.reject_unsupported import (
+    RejectionDecision,
+    classify_unsupported,
+)
 from fofa_compiler.domain.enums import CandidateCreator
 from fofa_compiler.domain.errors import ErrorLocation, ValidationError
-from fofa_compiler.domain.models import CandidateAnswer, CompetitionPackage, QueryPayload
+from fofa_compiler.domain.models import (
+    CandidateAnswer,
+    CompetitionPackage,
+    QueryPayload,
+    RejectionPayload,
+)
+from fofa_compiler.domain.query_validator import validate_query
 from fofa_compiler.domain.renderer import normalize, render
 from fofa_compiler.infrastructure.audit_log import AuditLog
 from fofa_compiler.infrastructure.semantic_parser import SemanticParser
@@ -32,6 +42,7 @@ class GenerationSummary:
     status: str
     total: int
     generated: int
+    refused: int
     failed: int
     items: tuple[GenerationItemResult, ...]
 
@@ -87,16 +98,44 @@ def generate_answers(
             continue
         item_root = f"items/{question.question_id}"
         try:
-            translated = parser.parse(question.question_id, question.raw_text)
-            if translated is None:
-                raise ValidationError(
-                    "没有完整匹配该题全部语义的离线规则",
-                    location=ErrorLocation(question_id=question.question_id),
+            decision = classify_unsupported(question.raw_text)
+            translated = None
+            node = None
+            validation_report = None
+            if decision is None:
+                translated = parser.parse(question.question_id, question.raw_text)
+                if translated is None:
+                    raise ValidationError(
+                        "没有完整匹配该题全部语义的离线规则",
+                        location=ErrorLocation(question_id=question.question_id),
+                    )
+                node = normalize(translated.node)
+                validation_report = validate_query(
+                    intent=translated.intent,
+                    node=node,
+                    validated_at=now,
                 )
-            node = normalize(translated.node)
-            query = render(node)
+                if not validation_report.is_valid:
+                    findings = (
+                        validation_report.syntax_checks
+                        + validation_report.type_checks
+                        + validation_report.coverage_checks
+                        + validation_report.logic_checks
+                    )
+                    decision = RejectionDecision(
+                        reason_code="DETERMINISTIC_VALIDATION_FAILED",
+                        unsupported_constraints=tuple(item.code for item in findings),
+                    )
+
+            if decision is not None:
+                query = decision.rejection_text
+                rule_id = f"rejection.{decision.reason_code}"
+            else:
+                assert translated is not None and node is not None
+                query = render(node)
+                rule_id = translated.rule_id
             fingerprint = _candidate_fingerprint(
-                question.fingerprint, translated.rule_id, query
+                question.fingerprint, rule_id, query
             )
             candidate_id = f"candidate-{fingerprint[:20]}"
             current_path = f"{item_root}/current.json"
@@ -110,6 +149,20 @@ def generate_answers(
                 candidate = existing
             else:
                 revision = 1 if existing is None else existing.revision + 1
+                payload: QueryPayload | RejectionPayload
+                if decision is not None:
+                    payload = RejectionPayload(
+                        rejection_text=decision.rejection_text,
+                        reason_code=decision.reason_code,
+                        unsupported_constraints=decision.unsupported_constraints,
+                    )
+                else:
+                    assert translated is not None and node is not None
+                    payload = QueryPayload(
+                        intent=translated.intent,
+                        ast=node.model_dump(mode="json"),
+                        rendered_query=query,
+                    )
                 candidate = CandidateAnswer(
                     candidate_id=candidate_id,
                     question_id=question.question_id,
@@ -117,17 +170,27 @@ def generate_answers(
                     created_by=CandidateCreator.RULE,
                     input_fingerprint=fingerprint,
                     created_at=now,
-                    payload=QueryPayload(
-                        intent=translated.intent,
-                        ast=node.model_dump(mode="json"),
-                        rendered_query=query,
-                    ),
+                    payload=payload,
                 )
                 repository.save_model(
                     f"{item_root}/candidates/{revision}.json", candidate
                 )
                 repository.save_model(current_path, candidate)
-                repository.save_model(f"{item_root}/intent.json", translated.intent)
+                if translated is not None:
+                    repository.save_model(f"{item_root}/intent.json", translated.intent)
+                if validation_report is not None:
+                    assert translated is not None and node is not None
+                    bound_report = validate_query(
+                        intent=translated.intent,
+                        node=node,
+                        validated_at=now,
+                        candidate_id=candidate.candidate_id,
+                        revision=revision,
+                    )
+                    repository.save_model(
+                        f"{item_root}/validations/{bound_report.report_id}.json",
+                        bound_report,
+                    )
                 audit_log.append(
                     event_type="candidate.created",
                     occurred_at=now,
@@ -136,13 +199,16 @@ def generate_answers(
                         "candidate_id": candidate.candidate_id,
                         "question_id": question.question_id,
                         "revision": revision,
-                        "rule_id": translated.rule_id,
+                        "rule_id": rule_id,
+                        "rejection_reason": (
+                            decision.reason_code if decision is not None else None
+                        ),
                     },
                 )
             results.append(
                 GenerationItemResult(
                     question_id=question.question_id,
-                    status="generated",
+                    status="refused" if decision is not None else "generated",
                     candidate_id=candidate.candidate_id,
                     query=query,
                 )
@@ -166,7 +232,8 @@ def generate_answers(
             )
 
     generated = sum(item.status == "generated" for item in results)
-    failed = len(results) - generated
+    refused = sum(item.status == "refused" for item in results)
+    failed = len(results) - generated - refused
     status = "completed" if failed == 0 else "completed_with_errors"
     job = {
         "schema_version": "1.0",
@@ -175,7 +242,7 @@ def generate_answers(
         "status": status,
         "processed": len(results),
         "total": len(results),
-        "counts": {"generated": generated, "failed": failed},
+        "counts": {"generated": generated, "refused": refused, "failed": failed},
         "question_ids": [item.question_id for item in results],
     }
     repository.save_json(f"jobs/{job_id}.json", job)
@@ -187,6 +254,7 @@ def generate_answers(
         status=status,
         total=len(results),
         generated=generated,
+        refused=refused,
         failed=failed,
         items=tuple(results),
     )
