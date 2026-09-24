@@ -97,3 +97,70 @@ fields:
     evidence:
       kind: project_competition_example
       locator: "题目/readme.md#答案内容"
+  cert:
+    value_types: [text]
+    operators: ["=", "!="]
+    evidence: &official_grammar
+      kind: official_primary_public_bundle
+      locator: "https://v5static.fofa.info/_nuxt/Bw0mZRLA.js"
+      verified_at: "2026-09-24"
+  cert.subject.cn:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar
+  cert.subject.org:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar
+  cert.issuer.cn:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar
+  cert.issuer.org:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar
+  cert.domain:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar
+  cert.is_equal:
+    value_types: [boolean]
+    operators: ["="]
+    evidence: *official_grammar
+  cert.is_valid:
+    value_types: [boolean]
+    operators: ["="]
+    evidence: *official_grammar
+  cert.is_match:
+    value_types: [boolean]
+    operators: ["="]
+    evidence: *official_grammar
+  cert.is_expired:
+    value_types: [boolean]
+    operators: ["="]
+    evidence: *official_grammar
+  cert.sn:
+    value_types: [certificate_serial]
+    operators: ["=", "!="]
+    evidence: *official_grammar
+  cert.not_after.after:
+    value_types: [timestamp]
+    operators: ["="]
+    evidence: *official_grammar
+  cert.not_after.before:
+    value_types: [timestamp]
+    operators: ["="]
+    evidence: *official_grammar
+  jarm:
+    value_types: [hash]
+    operators: ["=", "!="]
+    evidence: *official_grammar
+  tls.version:
+    value_types: [text]
+    operators: ["=", "!="]
+    evidence: *official_grammar
+  tls.ja3s:
+    value_types: [hash]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar
