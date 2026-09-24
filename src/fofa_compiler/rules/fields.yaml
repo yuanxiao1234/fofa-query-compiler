@@ -1,0 +1,99 @@
+schema_version: "1.0"
+registry_version: "2026-09-24.1"
+default_evidence:
+  kind: official_primary
+  locator: "https://fofa.info/"
+  access_status: dynamic_page_not_extractable
+fields:
+  ip:
+    value_types: [ipv4, ipv6, cidr]
+    operators: ["=", "==", "!="]
+    evidence:
+      kind: project_competition_example
+      locator: "题目/readme.md#答案内容"
+  port:
+    value_types: [integer]
+    operators: ["=", "!="]
+    range: {minimum: 1, maximum: 65535}
+    evidence:
+      kind: project_competition_example
+      locator: "题目/readme.md#答案内容"
+  domain:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M005-S004"
+  host:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M004-S003"
+  title:
+    value_types: [text, regex]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M013-S003"
+  body:
+    value_types: [text, regex]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M026-S002"
+  header:
+    value_types: [text, regex]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M030-S003"
+  banner:
+    value_types: [text, regex]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M037-S008"
+  protocol:
+    value_types: [text]
+    operators: ["=", "==", "!="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M016-S006"
+  country:
+    value_types: [text]
+    operators: ["=", "==", "!="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M013-S003"
+  region:
+    value_types: [text]
+    operators: ["=", "==", "!="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M088-S004"
+  city:
+    value_types: [text]
+    operators: ["=", "==", "!="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M008-S009"
+  asn:
+    value_types: [integer]
+    operators: ["=", "!="]
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M088-S004"
+  status_code:
+    value_types: [integer]
+    operators: ["=", "!="]
+    range: {minimum: 100, maximum: 599}
+    evidence:
+      kind: project_question
+      locator: "题目/题目.md:M028-S011"
+  app:
+    value_types: [text]
+    operators: ["=", "==", "!="]
+    evidence:
+      kind: project_competition_example
+      locator: "题目/readme.md#答案内容"

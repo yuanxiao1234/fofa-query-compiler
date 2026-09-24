@@ -60,15 +60,15 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 ### Tests for User Story 1
 
-- [ ] T014 [P] [US1] 为合法题包、UTF-8 BOM、空白与不同换行编写导入测试于 `tests/integration/test_package_import.py`
-- [ ] T015 [P] [US1] 为无效 JSON、缺失字段、缺题、重复与未知题号编写失败测试于 `tests/integration/test_package_import_errors.py`
+- [X] T014 [P] [US1] 为合法题包、UTF-8 BOM、空白与不同换行编写导入测试于 `tests/integration/test_package_import.py`
+- [X] T015 [P] [US1] 为无效 JSON、缺失字段、缺题、重复与未知题号编写失败测试于 `tests/integration/test_package_import_errors.py`
 
 ### Implementation for User Story 1
 
-- [ ] T016 [P] [US1] 实现题目 JSON、答案模板 JSON 和参赛包文本的只读解析器于 `src/fofa_compiler/infrastructure/package_reader.py`
-- [ ] T017 [US1] 实现必需字段、包编号、数量、题号唯一性与集合一致性校验服务于 `src/fofa_compiler/application/import_package.py`
-- [ ] T018 [US1] 保存已核验参赛包、原始顺序和导入诊断到工作区于 `src/fofa_compiler/application/import_package.py`
-- [ ] T019 [US1] 添加 `package import` 与 `package status` 命令及可定位错误输出于 `src/fofa_compiler/cli.py`
+- [X] T016 [P] [US1] 实现题目 JSON、答案模板 JSON 和参赛包文本的只读解析器于 `src/fofa_compiler/infrastructure/package_reader.py`
+- [X] T017 [US1] 实现必需字段、包编号、数量、题号唯一性与集合一致性校验服务于 `src/fofa_compiler/application/import_package.py`
+- [X] T018 [US1] 保存已核验参赛包、原始顺序和导入诊断到工作区于 `src/fofa_compiler/application/import_package.py`
+- [X] T019 [US1] 添加 `package import` 与 `package status` 命令及可定位错误输出于 `src/fofa_compiler/cli.py`
 
 **Checkpoint**: 真实 `题目/` 包可导入；所有结构错误一次性列全且原文件哈希不变。
 
@@ -83,16 +83,16 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 ### Tests for User Story 2
 
 - [ ] T020 [P] [US2] 建立逐题来源说明与预期原子约束的基准 fixture 于 `tests/fixtures/intent_cases.json`
-- [ ] T021 [P] [US2] 编写字段、运算符、值类型、分组优先级和转义的 AST 渲染单元测试于 `tests/unit/test_renderer.py`
+- [X] T021 [P] [US2] 编写字段、运算符、值类型、分组优先级和转义的 AST 渲染单元测试于 `tests/unit/test_renderer.py`
 - [ ] T022 [P] [US2] 编写当前题包各意图家族的规则翻译集成测试于 `tests/integration/test_rule_translation.py`
 - [ ] T023 [P] [US2] 编写相同输入连续三次生成相同 IR、查询和审计状态的确定性测试于 `tests/integration/test_determinism.py`
 
 ### Implementation for User Story 2
 
-- [ ] T024 [P] [US2] 定义 Predicate、And、Or、Not 与 Group 的判别联合 IR 模型及来源引用于 `src/fofa_compiler/domain/ir.py`
-- [ ] T025 [P] [US2] 建立经证据标注的 FOFA 字段、合法运算符和值类型注册表于 `src/fofa_compiler/rules/fields.yaml`
-- [ ] T026 [P] [US2] 建立国家地区、云厂商、协议、产品类别和别名的版本化映射于 `src/fofa_compiler/rules/mappings.yaml`
-- [ ] T027 [US2] 实现 IR 规范化、稳定排序但不改变逻辑语义、字面量转义和显式括号渲染于 `src/fofa_compiler/domain/renderer.py`
+- [X] T024 [P] [US2] 定义 Predicate、And、Or、Not 与 Group 的判别联合 IR 模型及来源引用于 `src/fofa_compiler/domain/ir.py`
+- [X] T025 [P] [US2] 建立经证据标注的 FOFA 字段、合法运算符和值类型注册表于 `src/fofa_compiler/rules/fields.yaml`
+- [X] T026 [P] [US2] 建立国家地区、云厂商、协议、产品类别和别名的版本化映射于 `src/fofa_compiler/rules/mappings.yaml`
+- [X] T027 [US2] 实现 IR 规范化、稳定排序但不改变逻辑语义、字面量转义和显式括号渲染于 `src/fofa_compiler/domain/renderer.py`
 - [ ] T028 [US2] 实现基础资产、网络位置、端口协议和产品类别规则翻译器于 `src/fofa_compiler/application/translators/core.py`
 - [ ] T029 [P] [US2] 实现网页响应、状态码、标题、正文、响应头和 Banner 规则翻译器于 `src/fofa_compiler/application/translators/web.py`
 - [ ] T030 [P] [US2] 实现证书、TLS 版本、JARM、哈希和域名关系规则翻译器于 `src/fofa_compiler/application/translators/certificate.py`

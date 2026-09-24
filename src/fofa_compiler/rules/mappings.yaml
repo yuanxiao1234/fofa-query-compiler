@@ -1,0 +1,26 @@
+schema_version: "1.0"
+mapping_version: "2026-09-24.1"
+entries:
+  countries:
+    中国: {value: CN, evidence: "ISO 3166-1 alpha-2"}
+    中国大陆: {value: CN, evidence: "ISO 3166-1 alpha-2; excludes HK/MO/TW by question semantics"}
+    美国: {value: US, evidence: "ISO 3166-1 alpha-2"}
+    英国: {value: GB, evidence: "ISO 3166-1 alpha-2"}
+    大不列颠及北爱尔兰联合王国: {value: GB, evidence: "ISO 3166 short name"}
+    德国: {value: DE, evidence: "ISO 3166-1 alpha-2"}
+    日本: {value: JP, evidence: "ISO 3166-1 alpha-2"}
+    韩国: {value: KR, evidence: "ISO 3166-1 alpha-2"}
+    荷兰: {value: NL, evidence: "ISO 3166-1 alpha-2"}
+    加拿大: {value: CA, evidence: "ISO 3166-1 alpha-2"}
+    土耳其: {value: TR, evidence: "ISO 3166-1 alpha-2"}
+    新西兰: {value: NZ, evidence: "ISO 3166-1 alpha-2"}
+  protocols:
+    SSH: {value: ssh, evidence: "题目/题目.md:M016-S006"}
+    DNS: {value: dns, evidence: "题目/题目.md:M014-S002"}
+    SNMP: {value: snmp, evidence: "题目/题目.md:M018-S006"}
+    FTP: {value: ftp, evidence: "题目/题目.md:M020-S005"}
+    TCP: {value: tcp, evidence: "题目/题目.md:M017-S001"}
+  products:
+    GitLab: {field: app, value: gitlab, evidence: "题目/readme.md#答案内容"}
+    WordPress: {field: app, value: WordPress, evidence: "题目/题目.md:M052-S002"}
+    Grafana: {field: app, value: Grafana, evidence: "题目/题目.md:M071-S006"}
