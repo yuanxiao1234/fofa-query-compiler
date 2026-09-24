@@ -19,6 +19,7 @@ from fofa_compiler.domain.models import (
 )
 from fofa_compiler.domain.query_validator import validate_query
 from fofa_compiler.domain.renderer import normalize, render
+from fofa_compiler.domain.risk import assess_risk
 from fofa_compiler.infrastructure.audit_log import AuditLog
 from fofa_compiler.infrastructure.semantic_parser import SemanticParser
 from fofa_compiler.infrastructure.workspace import JsonWorkspaceRepository
@@ -81,9 +82,9 @@ def generate_answers(
             )
 
     selection = "\0".join(question.question_id for question in questions)
-    job_id = "generate-" + hashlib.sha256(
-        f"{package.run_id}\0{selection}".encode()
-    ).hexdigest()[:16]
+    job_id = (
+        "generate-" + hashlib.sha256(f"{package.run_id}\0{selection}".encode()).hexdigest()[:16]
+    )
     results: list[GenerationItemResult] = []
 
     for question in questions:
@@ -134,9 +135,7 @@ def generate_answers(
                 assert translated is not None and node is not None
                 query = render(node)
                 rule_id = translated.rule_id
-            fingerprint = _candidate_fingerprint(
-                question.fingerprint, rule_id, query
-            )
+            fingerprint = _candidate_fingerprint(question.fingerprint, rule_id, query)
             candidate_id = f"candidate-{fingerprint[:20]}"
             current_path = f"{item_root}/current.json"
             existing: CandidateAnswer | None = None
@@ -172,10 +171,9 @@ def generate_answers(
                     created_at=now,
                     payload=payload,
                 )
-                repository.save_model(
-                    f"{item_root}/candidates/{revision}.json", candidate
-                )
+                repository.save_model(f"{item_root}/candidates/{revision}.json", candidate)
                 repository.save_model(current_path, candidate)
+                repository.save_model(f"{item_root}/risks.json", assess_risk(question, candidate))
                 if translated is not None:
                     repository.save_model(f"{item_root}/intent.json", translated.intent)
                 if validation_report is not None:
