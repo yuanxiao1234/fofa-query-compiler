@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 FIXED_REJECTION_TEXT = "该需求不能直接转换为FOFA搜索语句"
 
 

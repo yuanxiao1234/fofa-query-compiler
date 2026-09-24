@@ -16,7 +16,7 @@ from .enums import (
     RiskLevel,
 )
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION: Literal["1.0"] = "1.0"
 
 
 class DomainModel(BaseModel):

@@ -23,11 +23,11 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 **Purpose**: 固化技术决策并建立可测试的 Python 项目骨架
 
-- [ ] T001 将 Python 3.12、Pydantic v2、FastAPI/Jinja、本地 JSON 工作区、CLI/Web 共享核心及真实目录结构补入 `specs/001-fofa-query-compiler/plan.md`
-- [ ] T002 创建项目元数据、运行依赖、开发依赖和 `fofa-compiler` CLI 入口于 `pyproject.toml`
-- [ ] T003 [P] 创建包与分层骨架于 `src/fofa_compiler/__init__.py`、`src/fofa_compiler/domain/__init__.py`、`src/fofa_compiler/application/__init__.py`、`src/fofa_compiler/infrastructure/__init__.py`、`src/fofa_compiler/web/__init__.py`
-- [ ] T004 [P] 配置 Ruff、mypy 与 pytest 的项目规则于 `pyproject.toml`
-- [ ] T005 [P] 创建测试共享 fixture 和临时工作区工厂于 `tests/conftest.py`
+- [X] T001 将 Python 3.12、Pydantic v2、FastAPI/Jinja、本地 JSON 工作区、CLI/Web 共享核心及真实目录结构补入 `specs/001-fofa-query-compiler/plan.md`
+- [X] T002 创建项目元数据、运行依赖、开发依赖和 `fofa-compiler` CLI 入口于 `pyproject.toml`
+- [X] T003 [P] 创建包与分层骨架于 `src/fofa_compiler/__init__.py`、`src/fofa_compiler/domain/__init__.py`、`src/fofa_compiler/application/__init__.py`、`src/fofa_compiler/infrastructure/__init__.py`、`src/fofa_compiler/web/__init__.py`
+- [X] T004 [P] 配置 Ruff、mypy 与 pytest 的项目规则于 `pyproject.toml`
+- [X] T005 [P] 创建测试共享 fixture 和临时工作区工厂于 `tests/conftest.py`
 
 **Checkpoint**: 项目可安装，空测试套件、静态检查与 CLI 帮助命令可运行。
 
@@ -39,14 +39,14 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 **⚠️ CRITICAL**: 本阶段完成前不得开始用户故事实现。
 
-- [ ] T006 编写题目、参赛包、规范化意图、候选答案、验证结果、证据记录、复核记录、最终答案和答卷的 Pydantic v2 模型于 `src/fofa_compiler/domain/models.py`
-- [ ] T007 [P] 定义处理状态、风险级别、证据状态、匹配模式、逻辑运算符及固定拒绝文本于 `src/fofa_compiler/domain/enums.py`
-- [ ] T008 [P] 定义可定位到文件、JSON 路径和题号的领域错误层级于 `src/fofa_compiler/domain/errors.py`
-- [ ] T009 实现带格式版本、原子写入、确定性序列化和损坏检测的工作区仓储于 `src/fofa_compiler/infrastructure/workspace.py`
-- [ ] T010 [P] 定义生成器、证据读取器、时钟和工作区仓储端口于 `src/fofa_compiler/application/ports.py`
-- [ ] T011 实现共享应用服务容器与 CLI/Web 共用的用例装配于 `src/fofa_compiler/application/container.py`
-- [ ] T012 [P] 实现统一的结构化审计日志并过滤凭据、模型推理和未授权数据于 `src/fofa_compiler/infrastructure/audit_log.py`
-- [ ] T013 为领域模型往返、工作区重开和原子写入失败恢复编写单元测试于 `tests/unit/test_workspace.py`
+- [X] T006 编写题目、参赛包、规范化意图、候选答案、验证结果、证据记录、复核记录、最终答案和答卷的 Pydantic v2 模型于 `src/fofa_compiler/domain/models.py`
+- [X] T007 [P] 定义处理状态、风险级别、证据状态、匹配模式、逻辑运算符及固定拒绝文本于 `src/fofa_compiler/domain/enums.py`
+- [X] T008 [P] 定义可定位到文件、JSON 路径和题号的领域错误层级于 `src/fofa_compiler/domain/errors.py`
+- [X] T009 实现带格式版本、原子写入、确定性序列化和损坏检测的工作区仓储于 `src/fofa_compiler/infrastructure/workspace.py`
+- [X] T010 [P] 定义生成器、证据读取器、时钟和工作区仓储端口于 `src/fofa_compiler/application/ports.py`
+- [X] T011 实现共享应用服务容器与 CLI/Web 共用的用例装配于 `src/fofa_compiler/application/container.py`
+- [X] T012 [P] 实现统一的结构化审计日志并过滤凭据、模型推理和未授权数据于 `src/fofa_compiler/infrastructure/audit_log.py`
+- [X] T013 为领域模型往返、工作区重开和原子写入失败恢复编写单元测试于 `tests/unit/test_workspace.py`
 
 **Checkpoint**: 领域对象可持久化并重载，CLI 与 Web 能通过同一容器调用同一业务服务。
 
