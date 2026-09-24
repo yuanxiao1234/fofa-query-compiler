@@ -1,12 +1,15 @@
 import argparse
 import json
 from collections.abc import Sequence
+from dataclasses import asdict
 from pathlib import Path
 
 from fofa_compiler import __version__
 from fofa_compiler.application.container import build_container
+from fofa_compiler.application.generate_answers import generate_answers
 from fofa_compiler.application.import_package import ImportRequest, import_package
 from fofa_compiler.domain.errors import FofaCompilerError
+from fofa_compiler.infrastructure.semantic_parser import SemanticParser
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -22,7 +25,13 @@ def build_parser() -> argparse.ArgumentParser:
     import_parser.add_argument("--workspace", required=True, type=Path)
     status_parser = package_commands.add_parser("status", help="显示已导入参赛包状态")
     status_parser.add_argument("--workspace", required=True, type=Path)
-    subcommands.add_parser("generate", help="生成候选答案")
+    generate_parser = subcommands.add_parser("generate", help="生成候选答案")
+    generate_commands = generate_parser.add_subparsers(dest="generate_command")
+    generate_all = generate_commands.add_parser("all", help="生成全部题目")
+    generate_all.add_argument("--workspace", required=True, type=Path)
+    generate_one = generate_commands.add_parser("one", help="生成单道题目")
+    generate_one.add_argument("--workspace", required=True, type=Path)
+    generate_one.add_argument("--question-id", required=True)
     subcommands.add_parser("review", help="逐题复核")
     subcommands.add_parser("evidence", help="管理证据")
     subcommands.add_parser("export", help="导出合规答卷")
@@ -38,6 +47,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     if args.command == "package" and args.package_command is None:
         parser.parse_args(["package", "--help"])
+    if args.command == "generate" and args.generate_command is None:
+        parser.parse_args(["generate", "--help"])
     try:
         if args.command == "package" and args.package_command == "import":
             container = build_container(args.workspace)
@@ -67,6 +78,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                     sort_keys=True,
                 )
             )
+        elif args.command == "generate":
+            container = build_container(args.workspace)
+            summary = generate_answers(
+                repository=container.workspace,
+                audit_log=container.audit_log,
+                parser=SemanticParser(),
+                now=container.clock.now(),
+                question_id=args.question_id if args.generate_command == "one" else None,
+            )
+            print(json.dumps(asdict(summary), ensure_ascii=False, sort_keys=True))
+            return 5 if summary.failed else 0
     except FofaCompilerError as exc:
         print(
             json.dumps(

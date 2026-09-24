@@ -164,3 +164,15 @@ fields:
     value_types: [hash]
     operators: ["=", "==", "!=", "*=", "!*="]
     evidence: *official_grammar
+  after:
+    value_types: [timestamp]
+    operators: ["="]
+    evidence: *official_grammar
+  before:
+    value_types: [timestamp]
+    operators: ["="]
+    evidence: *official_grammar
+  server:
+    value_types: [text]
+    operators: ["=", "==", "!=", "*=", "!*="]
+    evidence: *official_grammar

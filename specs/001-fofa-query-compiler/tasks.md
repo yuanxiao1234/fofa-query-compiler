@@ -85,7 +85,7 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 - [ ] T020 [P] [US2] 建立逐题来源说明与预期原子约束的基准 fixture 于 `tests/fixtures/intent_cases.json`
 - [X] T021 [P] [US2] 编写字段、运算符、值类型、分组优先级和转义的 AST 渲染单元测试于 `tests/unit/test_renderer.py`
 - [ ] T022 [P] [US2] 编写当前题包各意图家族的规则翻译集成测试于 `tests/integration/test_rule_translation.py`
-- [ ] T023 [P] [US2] 编写相同输入连续三次生成相同 IR、查询和审计状态的确定性测试于 `tests/integration/test_determinism.py`
+- [X] T023 [P] [US2] 编写相同输入连续三次生成相同 IR、查询和审计状态的确定性测试于 `tests/integration/test_determinism.py`
 
 ### Implementation for User Story 2
 
@@ -96,10 +96,10 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 - [X] T028 [US2] 实现基础资产、网络位置、端口协议和产品类别规则翻译器于 `src/fofa_compiler/application/translators/core.py`
 - [X] T029 [P] [US2] 实现网页响应、状态码、标题、正文、响应头和 Banner 规则翻译器于 `src/fofa_compiler/application/translators/web.py`
 - [X] T030 [P] [US2] 实现证书、TLS 版本、JARM、哈希和域名关系规则翻译器于 `src/fofa_compiler/application/translators/certificate.py`
-- [ ] T031 [P] [US2] 实现时间边界、正则、范围与嵌套布尔逻辑规则翻译器于 `src/fofa_compiler/application/translators/advanced.py`
-- [ ] T032 [US2] 实现窄接口语义解析适配器，使离线规则路径不依赖模型且模型只能产出待验证 IR 于 `src/fofa_compiler/infrastructure/semantic_parser.py`
-- [ ] T033 [US2] 编排逐题解析、IR 规范化、渲染、状态保存和单题失败隔离于 `src/fofa_compiler/application/generate_answers.py`
-- [ ] T034 [US2] 添加 `generate all` 与 `generate one` 命令于 `src/fofa_compiler/cli.py`
+- [X] T031 [P] [US2] 实现时间边界、正则、范围与嵌套布尔逻辑规则翻译器于 `src/fofa_compiler/application/translators/advanced.py`
+- [X] T032 [US2] 实现窄接口语义解析适配器，使离线规则路径不依赖模型且模型只能产出待验证 IR 于 `src/fofa_compiler/infrastructure/semantic_parser.py`
+- [X] T033 [US2] 编排逐题解析、IR 规范化、渲染、状态保存和单题失败隔离于 `src/fofa_compiler/application/generate_answers.py`
+- [X] T034 [US2] 添加 `generate all` 与 `generate one` 命令于 `src/fofa_compiler/cli.py`
 
 **Checkpoint**: 可转换基准题均产出仅含查询文本的确定性候选结果，原子约束可追溯到独立 fixture。
 
