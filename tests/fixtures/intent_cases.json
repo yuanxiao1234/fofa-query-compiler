@@ -1,0 +1,176 @@
+[
+  {
+    "question_id": "M001-S009",
+    "source": "题目/题目.md:M001-S009",
+    "text": "请查询 IP 地址为 20.247.40.92 的资产。",
+    "family": "core.ip.exact",
+    "expected_query": "ip=\"20.247.40.92\"",
+    "atomic_constraints": [{"field": "ip", "match": "exact", "value": "20.247.40.92"}]
+  },
+  {
+    "question_id": "M002-S004",
+    "source": "题目/题目.md:M002-S004",
+    "text": "请查询 124.255.254.0/24 网段内的全部资产。",
+    "family": "core.ip.cidr",
+    "expected_query": "ip=\"124.255.254.0/24\"",
+    "atomic_constraints": [{"field": "ip", "match": "exact", "value": "124.255.254.0/24"}]
+  },
+  {
+    "question_id": "M003-S002",
+    "source": "题目/题目.md:M003-S002",
+    "text": "请查询主域是 zendesk.com 的全部资产。",
+    "family": "core.domain.exact",
+    "expected_query": "domain==\"zendesk.com\"",
+    "atomic_constraints": [{"field": "domain", "match": "exact", "value": "zendesk.com"}]
+  },
+  {
+    "question_id": "M004-S003",
+    "source": "题目/题目.md:M004-S003",
+    "text": "搜索网站名为 www.amazon.com 的资产。",
+    "family": "core.host.exact",
+    "expected_query": "host==\"www.amazon.com\"",
+    "atomic_constraints": [{"field": "host", "match": "exact", "value": "www.amazon.com"}]
+  },
+  {
+    "question_id": "M005-S004",
+    "source": "题目/题目.md:M005-S004",
+    "text": "我想找域名里带有 vpn 的所有网站。",
+    "family": "core.domain.contains",
+    "expected_query": "domain=\"vpn\"",
+    "atomic_constraints": [{"field": "domain", "match": "contains", "value": "vpn"}]
+  },
+  {
+    "question_id": "M006-S002",
+    "source": "题目/题目.md:M006-S002",
+    "text": "搜索位于大不列颠及北爱尔兰联合王国的资产。",
+    "family": "core.country.exact",
+    "expected_query": "country=\"GB\"",
+    "atomic_constraints": [{"field": "country", "match": "exact", "value": "GB"}]
+  },
+  {
+    "question_id": "M009-S008",
+    "source": "题目/题目.md:M009-S008",
+    "text": "搜索自治系统号为 4134 的资产。",
+    "family": "core.asn.exact",
+    "expected_query": "asn=\"4134\"",
+    "atomic_constraints": [{"field": "asn", "match": "exact", "value": 4134}]
+  },
+  {
+    "question_id": "M012-S009",
+    "source": "题目/题目.md:M012-S009",
+    "text": "请查询开放 3000 端口的资产。",
+    "family": "core.port.exact",
+    "expected_query": "port=\"3000\"",
+    "atomic_constraints": [{"field": "port", "match": "exact", "value": 3000}]
+  },
+  {
+    "question_id": "M014-S002",
+    "source": "题目/题目.md:M014-S002",
+    "text": "我想找中国的 DNS 服务。",
+    "family": "core.country.protocol",
+    "expected_query": "(country=\"CN\" && protocol=\"dns\")",
+    "atomic_constraints": [
+      {"field": "country", "match": "exact", "value": "CN"},
+      {"field": "protocol", "match": "exact", "value": "dns"}
+    ]
+  },
+  {
+    "question_id": "M016-S006",
+    "source": "题目/题目.md:M016-S006",
+    "text": "搜索 SSH 协议且端口为 22022 的资产。",
+    "family": "core.protocol.port",
+    "expected_query": "(protocol=\"ssh\" && port=\"22022\")",
+    "atomic_constraints": [
+      {"field": "protocol", "match": "exact", "value": "ssh"},
+      {"field": "port", "match": "exact", "value": 22022}
+    ]
+  },
+  {
+    "question_id": "M017-S001",
+    "source": "题目/题目.md:M017-S001",
+    "text": "我想看使用 TCP 协议的数据。",
+    "family": "core.protocol.exact",
+    "expected_query": "protocol=\"tcp\"",
+    "atomic_constraints": [{"field": "protocol", "match": "exact", "value": "tcp"}]
+  },
+  {
+    "question_id": "M018-S006",
+    "source": "题目/题目.md:M018-S006",
+    "text": "我想找互联网上提供 SNMP 网络管理服务的资产，不限定端口。",
+    "family": "core.protocol.service",
+    "expected_query": "protocol=\"snmp\"",
+    "atomic_constraints": [{"field": "protocol", "match": "exact", "value": "snmp"}]
+  },
+  {
+    "question_id": "TRAIN-GITLAB",
+    "source": "题目/readme.md#答案内容",
+    "text": "我想搜索暴露在公网的 GitLab 资产。",
+    "family": "core.product.app",
+    "expected_query": "app=\"gitlab\"",
+    "atomic_constraints": [{"field": "app", "match": "exact", "value": "gitlab"}]
+  },
+  {
+    "question_id": "M026-S002",
+    "source": "题目/题目.md:M026-S002",
+    "text": "搜索网页正文中出现 NoSuchUpload 错误标记的资产。",
+    "family": "web.body.contains",
+    "expected_query": "body=\"NoSuchUpload\"",
+    "atomic_constraints": [{"field": "body", "match": "contains", "value": "NoSuchUpload"}]
+  },
+  {
+    "question_id": "M027-S008",
+    "source": "题目/题目.md:M027-S008",
+    "text": "我想找响应信息中出现 Content-Security-Policy-Report-Only 的资产。",
+    "family": "web.banner.contains",
+    "expected_query": "banner=\"Content-Security-Policy-Report-Only\"",
+    "atomic_constraints": [{"field": "banner", "match": "contains", "value": "Content-Security-Policy-Report-Only"}]
+  },
+  {
+    "question_id": "M028-S011",
+    "source": "题目/题目.md:M028-S011",
+    "text": "搜索状态码为 308 的网站类资产。",
+    "family": "web.status_code.exact",
+    "expected_query": "status_code=\"308\"",
+    "atomic_constraints": [{"field": "status_code", "match": "exact", "value": 308}]
+  },
+  {
+    "question_id": "M029-S010",
+    "source": "题目/题目.md:M029-S010",
+    "text": "请帮我查询响应信息有 SSH-2.0-OpenSSH_6.1 的资产。",
+    "family": "web.banner.contains",
+    "expected_query": "banner=\"SSH-2.0-OpenSSH_6.1\"",
+    "atomic_constraints": [{"field": "banner", "match": "contains", "value": "SSH-2.0-OpenSSH_6.1"}]
+  },
+  {
+    "question_id": "M030-S003",
+    "source": "题目/题目.md:M030-S003",
+    "text": "搜索header包含 Set-Cookie:PHPSESSID 的资产。",
+    "family": "web.header.contains",
+    "expected_query": "header=\"Set-Cookie:PHPSESSID\"",
+    "atomic_constraints": [{"field": "header", "match": "contains", "value": "Set-Cookie:PHPSESSID"}]
+  },
+  {
+    "question_id": "M031-S009",
+    "source": "题目/题目.md:M031-S009",
+    "text": "搜索引用 jquery.min.js 文件的网页。",
+    "family": "web.body.resource_reference",
+    "expected_query": "body=\"jquery.min.js\"",
+    "atomic_constraints": [{"field": "body", "match": "contains", "value": "jquery.min.js"}]
+  },
+  {
+    "question_id": "M077-S009",
+    "source": "题目/题目.md:M077-S009",
+    "text": "我想找网页源码中包含这段原样文本的资产：class=\"container\"。",
+    "family": "web.body.literal",
+    "expected_query": "body=\"class=\\\"container\\\"\"",
+    "atomic_constraints": [{"field": "body", "match": "contains", "value": "class=\"container\""}]
+  },
+  {
+    "question_id": "M078-S009",
+    "source": "题目/题目.md:M078-S009",
+    "text": "在网页正文中搜索这段 JSON 异常信息片段，保留双引号和反斜杠：\n\"exception\": \"Symfony\\Component\\ErrorHandler\\Error\\FatalError\"",
+    "family": "web.body.literal_escaped",
+    "expected_query": "body=\"\\\"exception\\\": \\\"Symfony\\\\Component\\\\ErrorHandler\\\\Error\\\\FatalError\\\"\"",
+    "atomic_constraints": [{"field": "body", "match": "contains", "value": "\"exception\": \"Symfony\\Component\\ErrorHandler\\Error\\FatalError\""}]
+  }
+]

@@ -93,8 +93,8 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 - [X] T025 [P] [US2] 建立经证据标注的 FOFA 字段、合法运算符和值类型注册表于 `src/fofa_compiler/rules/fields.yaml`
 - [X] T026 [P] [US2] 建立国家地区、云厂商、协议、产品类别和别名的版本化映射于 `src/fofa_compiler/rules/mappings.yaml`
 - [X] T027 [US2] 实现 IR 规范化、稳定排序但不改变逻辑语义、字面量转义和显式括号渲染于 `src/fofa_compiler/domain/renderer.py`
-- [ ] T028 [US2] 实现基础资产、网络位置、端口协议和产品类别规则翻译器于 `src/fofa_compiler/application/translators/core.py`
-- [ ] T029 [P] [US2] 实现网页响应、状态码、标题、正文、响应头和 Banner 规则翻译器于 `src/fofa_compiler/application/translators/web.py`
+- [X] T028 [US2] 实现基础资产、网络位置、端口协议和产品类别规则翻译器于 `src/fofa_compiler/application/translators/core.py`
+- [X] T029 [P] [US2] 实现网页响应、状态码、标题、正文、响应头和 Banner 规则翻译器于 `src/fofa_compiler/application/translators/web.py`
 - [ ] T030 [P] [US2] 实现证书、TLS 版本、JARM、哈希和域名关系规则翻译器于 `src/fofa_compiler/application/translators/certificate.py`
 - [ ] T031 [P] [US2] 实现时间边界、正则、范围与嵌套布尔逻辑规则翻译器于 `src/fofa_compiler/application/translators/advanced.py`
 - [ ] T032 [US2] 实现窄接口语义解析适配器，使离线规则路径不依赖模型且模型只能产出待验证 IR 于 `src/fofa_compiler/infrastructure/semantic_parser.py`
