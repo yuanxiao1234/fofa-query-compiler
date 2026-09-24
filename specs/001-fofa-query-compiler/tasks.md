@@ -181,20 +181,20 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 ### Tests for User Story 6
 
-- [ ] T055 [P] [US6] 编写 Web 路由的导入、生成状态、筛选、复核、证据和导出门禁集成测试于 `tests/integration/test_web_routes.py`
+- [X] T055 [P] [US6] 编写 Web 路由的导入、生成状态、筛选、复核、证据和导出门禁集成测试于 `tests/integration/test_web_routes.py`
 - [ ] T056 [P] [US6] 编写本机绑定、状态恢复、失败隔离、2 秒进度轮询和 CLI/Web 导出一致性的浏览器测试于 `tests/e2e/test_web_workflow.py`
 
 ### Implementation for User Story 6
 
-- [ ] T057 [P] [US6] 实现仅绑定回环地址的 FastAPI 应用、依赖注入与安全响应头于 `src/fofa_compiler/web/app.py`
-- [ ] T058 [US6] 实现题包上传、导入诊断和工作区摘要路由于 `src/fofa_compiler/web/routes/packages.py`
-- [ ] T059 [US6] 实现批量生成、单题失败隔离及总数/完成/处理中/失败/阻塞进度路由于 `src/fofa_compiler/web/routes/generation.py`
-- [ ] T060 [P] [US6] 实现按状态、风险、证据、验证结果和题号筛选的题目与详情路由于 `src/fofa_compiler/web/routes/questions.py`
-- [ ] T061 [US6] 实现答案修订、证据补齐、风险核对、重新校验和确认路由于 `src/fofa_compiler/web/routes/review.py`
-- [ ] T062 [US6] 实现复用共享导出用例的门禁展示与文件下载路由于 `src/fofa_compiler/web/routes/export.py`
-- [ ] T063 [P] [US6] 创建导入、仪表盘、题目列表、逐题复核和导出页面于 `src/fofa_compiler/web/templates/import.html`、`src/fofa_compiler/web/templates/dashboard.html`、`src/fofa_compiler/web/templates/questions.html`、`src/fofa_compiler/web/templates/review.html`、`src/fofa_compiler/web/templates/export.html`
-- [ ] T064 [US6] 实现无构建步骤的筛选、保存反馈和至多 2 秒进度轮询于 `src/fofa_compiler/web/static/app.js` 与 `src/fofa_compiler/web/static/app.css`
-- [ ] T065 [US6] 添加 `web` 本地启动命令并拒绝非回环监听参数于 `src/fofa_compiler/cli.py`
+- [X] T057 [P] [US6] 实现仅绑定回环地址的 FastAPI 应用、依赖注入与安全响应头于 `src/fofa_compiler/web/app.py`
+- [X] T058 [US6] 实现题包上传、导入诊断和工作区摘要路由于 `src/fofa_compiler/web/routes/packages.py`
+- [X] T059 [US6] 实现批量生成、单题失败隔离及总数/完成/处理中/失败/阻塞进度路由于 `src/fofa_compiler/web/routes/generation.py`
+- [X] T060 [P] [US6] 实现按状态、风险、证据、验证结果和题号筛选的题目与详情路由于 `src/fofa_compiler/web/routes/questions.py`
+- [X] T061 [US6] 实现答案修订、证据补齐、风险核对、重新校验和确认路由于 `src/fofa_compiler/web/routes/review.py`
+- [X] T062 [US6] 实现复用共享导出用例的门禁展示与文件下载路由于 `src/fofa_compiler/web/routes/export.py`
+- [X] T063 [P] [US6] 创建导入、仪表盘、题目列表、逐题复核和导出页面于 `src/fofa_compiler/web/templates/import.html`、`src/fofa_compiler/web/templates/dashboard.html`、`src/fofa_compiler/web/templates/questions.html`、`src/fofa_compiler/web/templates/review.html`、`src/fofa_compiler/web/templates/export.html`
+- [X] T064 [US6] 实现无构建步骤的筛选、保存反馈和至多 2 秒进度轮询于 `src/fofa_compiler/web/static/app.js` 与 `src/fofa_compiler/web/static/app.css`
+- [X] T065 [US6] 添加 `web` 本地启动命令并拒绝非回环监听参数于 `src/fofa_compiler/cli.py`
 
 **Checkpoint**: 核心工作流无需命令行即可完成，页面重开后进度保留，CLI/Web 业务结果一致。
 

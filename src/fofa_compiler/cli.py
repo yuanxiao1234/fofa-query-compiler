@@ -1,4 +1,5 @@
 import argparse
+import ipaddress
 import json
 from collections.abc import Sequence
 from dataclasses import asdict
@@ -69,7 +70,11 @@ def build_parser() -> argparse.ArgumentParser:
     export_parser.add_argument("--workspace", required=True, type=Path)
     export_parser.add_argument("--participant", required=True)
     export_parser.add_argument("--output", required=True, type=Path)
-    subcommands.add_parser("web", help="启动本地 Web 界面")
+    web_parser = subcommands.add_parser("web", help="启动本地 Web 界面")
+    web_parser.add_argument("--workspace", required=True, type=Path)
+    web_parser.add_argument("--host", default="127.0.0.1")
+    web_parser.add_argument("--port", default=8765, type=int)
+    web_parser.add_argument("--no-open", action="store_true")
     return parser
 
 
@@ -202,6 +207,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                 now=container.clock.now(),
             )
             print(record.model_dump_json())
+        elif args.command == "web":
+            address = ipaddress.ip_address(args.host)
+            if not address.is_loopback:
+                raise FofaCompilerError("Web 服务只允许监听回环地址")
+            if not 1 <= args.port <= 65535:
+                raise FofaCompilerError("Web 服务端口必须位于 1 到 65535")
+            import uvicorn
+
+            from fofa_compiler.web.app import create_app
+
+            uvicorn.run(create_app(args.workspace), host=args.host, port=args.port)
     except FofaCompilerError as exc:
         print(
             json.dumps(
