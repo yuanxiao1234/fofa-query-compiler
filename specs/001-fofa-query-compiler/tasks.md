@@ -136,14 +136,14 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 ### Tests for User Story 5
 
-- [ ] T042 [P] [US5] 编写 100 题合法答卷结构、UTF-8、顺序和确定性导出的端到端测试于 `tests/e2e/test_answer_export.py`
-- [ ] T043 [P] [US5] 编写空答案、ID 集合异常、未确认、证据阻塞和输出污染的门禁测试于 `tests/integration/test_export_gates.py`
+- [X] T042 [P] [US5] 编写 100 题合法答卷结构、UTF-8、顺序和确定性导出的端到端测试于 `tests/e2e/test_answer_export.py`
+- [X] T043 [P] [US5] 编写空答案、ID 集合异常、未确认、证据阻塞和输出污染的门禁测试于 `tests/integration/test_export_gates.py`
 
 ### Implementation for User Story 5
 
-- [ ] T044 [US5] 实现完整性、逐题确认、高风险检查与证据阻塞的导出门禁聚合器于 `src/fofa_compiler/application/export_gates.py`
-- [ ] T045 [US5] 实现按原始顺序输出且只含选手名、包编号、题号和最终查询的原子 JSON 导出器于 `src/fofa_compiler/application/export_answers.py`
-- [ ] T046 [US5] 添加 `export` 命令、覆盖保护和全部阻塞项报告于 `src/fofa_compiler/cli.py`
+- [X] T044 [US5] 实现完整性、逐题确认、高风险检查与证据阻塞的导出门禁聚合器于 `src/fofa_compiler/application/export_gates.py`
+- [X] T045 [US5] 实现按原始顺序输出且只含选手名、包编号、题号和最终查询的原子 JSON 导出器于 `src/fofa_compiler/application/export_answers.py`
+- [X] T046 [US5] 添加 `export` 命令、覆盖保护和全部阻塞项报告于 `src/fofa_compiler/cli.py`
 
 **Checkpoint**: 合法状态生成标准解析器可读的答卷；任何门禁失败均不产生或覆盖目标文件。
 
@@ -157,17 +157,17 @@ description: "FOFA 自然语言查询编译器的依赖有序实施任务"
 
 ### Tests for User Story 4
 
-- [ ] T047 [P] [US4] 编写复杂分组、正则、转义、外部资料、指纹与低置信度风险分类测试于 `tests/unit/test_risk_classification.py`
-- [ ] T048 [P] [US4] 编写原始来源、官方替代、存档、用户材料和不可访问阻塞的证据测试于 `tests/integration/test_evidence_review.py`
-- [ ] T049 [P] [US4] 编写修改失效旧确认、风险检查清单和双人分歧解决测试于 `tests/integration/test_manual_review.py`
+- [X] T047 [P] [US4] 编写复杂分组、正则、转义、外部资料、指纹与低置信度风险分类测试于 `tests/unit/test_risk_classification.py`
+- [X] T048 [P] [US4] 编写原始来源、官方替代、存档、用户材料和不可访问阻塞的证据测试于 `tests/integration/test_evidence_review.py`
+- [X] T049 [P] [US4] 编写修改失效旧确认、风险检查清单和双人分歧解决测试于 `tests/integration/test_manual_review.py`
 
 ### Implementation for User Story 4
 
-- [ ] T050 [P] [US4] 实现风险规则、强制检查项与原因分类于 `src/fofa_compiler/domain/risk.py`
-- [ ] T051 [P] [US4] 实现证据来源类型、内容摘要、提取事实、访问状态与替代来源合格性校验于 `src/fofa_compiler/application/evidence.py`
-- [ ] T052 [US4] 实现逐题修订、重新校验、旧确认失效和审计记录更新于 `src/fofa_compiler/application/review_answer.py`
-- [ ] T053 [US4] 实现两名独立复核者按字段、匹配方式、值、逻辑、否定和边界作出原子判定及分歧解决于 `src/fofa_compiler/application/semantic_acceptance.py`
-- [ ] T054 [US4] 添加 `review show`、`review amend`、`review confirm` 和 `evidence add` 命令于 `src/fofa_compiler/cli.py`
+- [X] T050 [P] [US4] 实现风险规则、强制检查项与原因分类于 `src/fofa_compiler/domain/risk.py`
+- [X] T051 [P] [US4] 实现证据来源类型、内容摘要、提取事实、访问状态与替代来源合格性校验于 `src/fofa_compiler/application/evidence.py`
+- [X] T052 [US4] 实现逐题修订、重新校验、旧确认失效和审计记录更新于 `src/fofa_compiler/application/review_answer.py`
+- [X] T053 [US4] 实现两名独立复核者按字段、匹配方式、值、逻辑、否定和边界作出原子判定及分歧解决于 `src/fofa_compiler/application/semantic_acceptance.py`
+- [X] T054 [US4] 添加 `review show`、`review amend`、`review confirm` 和 `evidence add` 命令于 `src/fofa_compiler/cli.py`
 
 **Checkpoint**: 每题均有可审计确认状态；证据不足、高风险检查未完成或双人分歧时导出门禁保持关闭。
 
